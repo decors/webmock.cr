@@ -22,4 +22,8 @@ class HTTP::Client
       raise WebMock::NetConnectNotAllowedError.new(request)
     end
   end
+
+  private def exec_internal(request : HTTP::Request, &block : HTTP::Client::Response -> T) : T forall T
+    yield exec_internal(request)
+  end
 end
